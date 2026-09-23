@@ -105,10 +105,10 @@ for profile in "${PROFILES[@]}"; do
     [ -f "$PDIR/packages.txt" ] && sudo pacman -S --needed --noconfirm - < "$PDIR/packages.txt"
 
     if [ -f "$PDIR/packages-aur.txt" ]; then
-        while read -r pkg; do
-            [ -z "$pkg" ] && continue
-            aur sync --noview "$pkg"
-        done < "$PDIR/packages-aur.txt"
+        # baca ke array dulu -- JANGAN "done < file", itu membajak stdin
+        # dan bikin prompt [Y/n] makepkg gagal otomatis
+        mapfile -t AUR_PKGS < <(grep -v '^[[:space:]]*$' "$PDIR/packages-aur.txt")
+        aur sync --noview "${AUR_PKGS[@]}"
         sudo pacman -Sy
         sudo pacman -S --needed --noconfirm - < "$PDIR/packages-aur.txt"
     fi
