@@ -1,0 +1,268 @@
+config_version = 14
+
+[bar]
+order = [ "default", "bottom" ]
+
+    [bar.bottom]
+    background_opacity = 0.0
+    capsule = true
+    capsule_fill = "surface"
+    capsule_thickness = 0.99999998137354851
+    center = [ "workspaces", "active_window" ]
+    enabled = true
+    end = [ "clipboard", "spacer_2", "screenshot" ]
+    position = "bottom"
+    start = [
+        "group:g1",
+        "mpd_output",
+        "mpd_shuffle",
+        "mpd_category_album",
+        "mpd_category_single",
+        "mpd_category_cover",
+        "media"
+    ]
+
+        [[bar.bottom.capsule_group]]
+        accordion = false
+        accordion_direction = "end"
+        enabled = true
+        fill = "surface"
+        id = "g1"
+        members = [ "input_volume", "output_volume" ]
+        opacity = 1.0
+        padding = 6.0
+
+    [bar.default]
+    background_opacity = 0.0
+    capsule = true
+    capsule_fill = "surface"
+    capsule_thickness = 0.99999998137354851
+    center = [ "clock", "spacer_2", "date", "spacer_2", "weather" ]
+    end = [ "bluetooth", "spacer_2", "group:g3" ]
+    shadow = false
+    start = [ "group:g1", "spacer_2", "group:g2", "spacer_2", "group:g4", "group:g5" ]
+    thickness = 32
+
+        [[bar.default.capsule_group]]
+        accordion = false
+        accordion_direction = "end"
+        enabled = true
+        fill = "surface_variant"
+        id = "g3"
+        members = [ "network_rx", "network", "network_tx" ]
+        opacity = 1.0
+        padding = 6.0
+
+        [[bar.default.capsule_group]]
+        accordion = false
+        accordion_direction = "end"
+        enabled = true
+        fill = "surface_variant"
+        id = "g1"
+        members = [ "cpu", "temp", "ram" ]
+        opacity = 1.0
+        padding = 6.0
+
+        [[bar.default.capsule_group]]
+        accordion = false
+        accordion_direction = "end"
+        enabled = true
+        fill = "surface_variant"
+        id = "g2"
+        members = [ "gpu_usage", "gpu_temp", "gpu_vram" ]
+        opacity = 1.0
+        padding = 6.0
+
+        [[bar.default.capsule_group]]
+        accordion = false
+        accordion_direction = "end"
+        enabled = true
+        fill = "surface_variant"
+        id = "g4"
+        members = [ "disk_root_used", "disk_root_free" ]
+        opacity = 1.0
+        padding = 6.0
+
+        [[bar.default.capsule_group]]
+        accordion = false
+        accordion_direction = "end"
+        enabled = true
+        fill = "surface"
+        id = "g5"
+        members = [ "disk_home_used", "disk_home_free" ]
+        opacity = 1.0
+        padding = 6.0
+
+[control_center]
+hidden_tabs = [ "power", "screen-time" ]
+
+    [[control_center.shortcuts]]
+    type = "wifi"
+
+    [[control_center.shortcuts]]
+    type = "bluetooth"
+
+    [[control_center.shortcuts]]
+    type = "caffeine"
+
+    [[control_center.shortcuts]]
+    type = "nightlight"
+
+    [[control_center.shortcuts]]
+    type = "notification"
+
+[location]
+auto_locate = true
+
+[lockscreen_widgets]
+enabled = false
+schema_version = 2
+widget_order = [ "lockscreen-login-box@DP-3" ]
+
+    [lockscreen_widgets.grid]
+    cell_size = 16
+    major_interval = 4
+    visible = true
+
+    [lockscreen_widgets.widget."lockscreen-login-box@DP-3"]
+    box_height = 196.0
+    box_width = 810.0
+    cx = 1280.0
+    cy = 1418.0
+    output = "DP-3"
+    placement_height = 1600.0
+    placement_width = 2560.0
+    rotation = 0.0
+    type = "login_box"
+
+        [lockscreen_widgets.widget."lockscreen-login-box@DP-3".settings]
+        background_color = "surface_variant"
+        background_opacity = 0.88
+        background_radius = 12.0
+        center_password_text = false
+        input_opacity = 1.0
+        input_radius = 6.0
+        layout = "regular"
+        show_caps_lock = true
+        show_keyboard_layout = true
+        show_login_button = true
+        show_media = true
+        show_session_buttons = true
+        show_unlock_hint = true
+        show_weather = true
+
+[plugins]
+enabled = [ "d3vzero/mpd-tools" ]
+
+    [[plugins.source]]
+    kind = "git"
+    location = "https://github.com/noctalia-dev/official-plugins"
+    name = "official"
+
+    [[plugins.source]]
+    kind = "git"
+    location = "https://github.com/noctalia-dev/community-plugins"
+    name = "community"
+
+    [[plugins.source]]
+    kind = "path"
+    location = "~/.config/noctalia/plugins/d3vzero"
+    name = "d3vzero"
+
+[theme]
+pure_black_dark = true
+source = "wallpaper"
+wallpaper_scheme = "m3-monochrome"
+
+[wallpaper]
+directory = "/home/DrDDrake/Pictures/Wallpapers"
+
+    [wallpaper.default]
+    path = "/home/DrDDrake/Pictures/Wallpapers/SuperMassiveBLACKHOLE.jpg"
+
+    [wallpaper.last]
+    path = "/home/DrDDrake/Pictures/Wallpapers/SuperMassiveBLACKHOLE.jpg"
+
+    [wallpaper.monitors.DP-3]
+    path = "/home/DrDDrake/Pictures/Wallpapers/SuperMassiveBLACKHOLE.jpg"
+
+[weather]
+refresh_minutes = 60
+
+[widget.active_window]
+max_length = 200
+title_scroll = "always"
+
+[widget.bluetooth]
+anchor = true
+show_label = true
+
+[widget.date]
+anchor = true
+
+[widget.disk_home_free]
+highlight_color = "primary"
+path = "/home"
+stat = "disk_free"
+type = "sysmon"
+
+[widget.disk_home_used]
+path = "/home"
+stat = "disk_used"
+type = "sysmon"
+
+[widget.disk_root_free]
+highlight_color = "primary"
+path = "/"
+stat = "disk_free"
+type = "sysmon"
+
+[widget.disk_root_used]
+path = "/"
+stat = "disk_used"
+type = "sysmon"
+
+[widget.gpu_temp]
+stat = "gpu_temp"
+type = "sysmon"
+
+[widget.gpu_usage]
+stat = "gpu_usage"
+type = "sysmon"
+
+[widget.gpu_vram]
+stat = "gpu_vram"
+type = "sysmon"
+
+[widget.media]
+max_length = 250
+min_length = 250
+show_progress = true
+title_scroll = "always"
+
+[widget.mpd_category_album]
+type = "d3vzero/mpd-tools:mpd_category_album"
+
+[widget.mpd_category_cover]
+type = "d3vzero/mpd-tools:mpd_category_cover"
+
+[widget.mpd_category_single]
+type = "d3vzero/mpd-tools:mpd_category_single"
+
+[widget.mpd_output]
+type = "d3vzero/mpd-tools:mpd_output"
+
+[widget.mpd_shuffle]
+type = "d3vzero/mpd-tools:mpd_shuffle"
+
+[widget.network_rx]
+anchor = true
+
+[widget.network_tx]
+anchor = true
+
+[widget.spacer_2]
+type = "spacer"
+
+[widget.workspaces]
+anchor = true

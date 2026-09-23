@@ -1,0 +1,4 @@
+[[action]]
+label   = "Buka dengan Neovim"
+command = "kitty nvim {path}"
+context = "file"

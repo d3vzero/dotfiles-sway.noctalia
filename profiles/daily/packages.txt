@@ -1,0 +1,6 @@
+steam
+lib32-nvidia-utils
+obs-studio
+lib32-mesa
+ocl-icd
+opencl-nvidia

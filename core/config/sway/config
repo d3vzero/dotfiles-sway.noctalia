@@ -1,0 +1,77 @@
+set $mod Mod4
+set $term kitty
+
+output DP-3 resolution 2560x1600 position 0,0
+
+### Tampilan: hilangkan titlebar teks (SSD), border tipis ###
+default_border pixel 2
+default_floating_border pixel 2
+
+### Autostart ###
+exec dbus-update-activation-environment --all
+exec pipewire
+exec pipewire-pulse
+exec wireplumber
+exec /usr/lib/xdg-desktop-portal
+exec /usr/lib/xdg-desktop-portal-wlr
+exec /usr/lib/xdg-desktop-portal-gtk
+exec noctalia
+exec /home/DrDDrake/.local/bin/firefox-tmpfs-recreate.sh
+exec /home/DrDDrake/.local/bin/mpd-mpris-autostart.sh
+
+### Aplikasi & Utility ###
+bindsym $mod+Return exec $term
+bindsym $mod+f exec firefox
+bindsym $mod+c kill
+bindsym $mod+shift+e exit
+bindsym $mod+e exec env QT_QUICK_BACKEND=software /home/DrDDrake/.local/bin/omafiles
+bindsym $mod+g exec steam
+bindsym $mod+o exec obs
+bindsym $mod+shift+s exec /home/DrDDrake/.local/bin/split-obs-record.sh > /tmp/split-obs.log 2>&1
+bindsym $mod+u exec /home/DrDDrake/.local/bin/usb-mount.sh
+bindsym $mod+shift+u exec /home/DrDDrake/.local/bin/usb-unmount.sh
+
+### Noctalia (IPC) ###
+bindsym $mod+d exec noctalia msg panel-toggle launcher
+bindsym $mod+Escape exec noctalia msg panel-toggle session
+bindsym $mod+l exec noctalia msg session lock
+bindsym $mod+s exec noctalia msg panel-toggle control-center
+bindsym $mod+w exec noctalia msg wallpaper-random
+bindsym Print exec noctalia msg screenshot-region
+bindsym $mod+Print exec noctalia msg screenshot-fullscreen
+
+### Media & MPC ###
+bindsym XF86AudioRaiseVolume exec wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+
+bindsym XF86AudioLowerVolume exec wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-
+bindsym XF86AudioMute exec wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle
+bindsym XF86AudioMicMute exec wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle
+bindsym XF86AudioPlay exec mpc toggle
+bindsym XF86AudioNext exec mpc next
+bindsym XF86AudioPrev exec mpc prev
+bindsym XF86AudioStop exec mpc stop
+bindsym $mod+bracketright exec mpc next
+bindsym $mod+bracketleft exec mpc prev
+bindsym $mod+p exec mpc toggle
+
+### Window & Workspace ###
+bindsym $mod+Tab focus next
+bindsym $mod+Left focus left
+bindsym $mod+Right focus right
+bindsym $mod+Up focus up
+bindsym $mod+Down focus down
+bindsym $mod+Ctrl+Right resize grow width 40px
+bindsym $mod+Ctrl+Left resize shrink width 40px
+bindsym $mod+Ctrl+Up resize shrink height 40px
+bindsym $mod+Ctrl+Down resize grow height 40px
+bindsym $mod+1 workspace 1
+bindsym $mod+2 workspace 2
+bindsym $mod+3 workspace 3
+bindsym $mod+4 workspace 4
+bindsym $mod+5 workspace 5
+bindsym $mod+Shift+1 move container to workspace 1
+bindsym $mod+Shift+2 move container to workspace 2
+bindsym $mod+Shift+3 move container to workspace 3
+bindsym $mod+Shift+4 move container to workspace 4
+bindsym $mod+Shift+5 move container to workspace 5
+
+include ~/.config/sway/conf.d/*.conf

@@ -1,0 +1,45 @@
+id = "d3vzero/mpd-tools"
+name = "MPD Tools"
+version = "1.1.0"
+plugin_api = 15
+author = "d3vzero"
+license = "MIT"
+dependencies = []
+tags = ["mpd", "music"]
+icon = "music"
+description = "Toggle output DAC/System, shuffle, dan switch kategori musik Album/Single/Cover untuk MPD."
+
+[[widget]]
+id = "mpd_output"
+entry = "mpd_output.luau"
+
+  [widget.actions]
+  left = "plugin d3vzero/mpd-tools:mpd_output all toggle"
+
+[[widget]]
+id = "mpd_shuffle"
+entry = "mpd_shuffle.luau"
+
+  [widget.actions]
+  left = "plugin d3vzero/mpd-tools:mpd_shuffle all toggle"
+
+[[widget]]
+id = "mpd_category_album"
+entry = "mpd_category_album.luau"
+
+  [widget.actions]
+  left = "plugin d3vzero/mpd-tools:mpd_category_album all toggle"
+
+[[widget]]
+id = "mpd_category_single"
+entry = "mpd_category_single.luau"
+
+  [widget.actions]
+  left = "plugin d3vzero/mpd-tools:mpd_category_single all toggle"
+
+[[widget]]
+id = "mpd_category_cover"
+entry = "mpd_category_cover.luau"
+
+  [widget.actions]
+  left = "plugin d3vzero/mpd-tools:mpd_category_cover all toggle"
