@@ -1,0 +1,11 @@
+# Environment wajib untuk NVIDIA & Sway
+export LIBSEAT_BACKEND=logind
+export GBM_BACKEND=nvidia-drm
+export __GLX_VENDOR_LIBRARY_NAME=nvidia
+export WLR_NO_HARDWARE_CURSOR=1
+export SWAY_UNSUPPORTED_GPU=true
+
+# Auto-start Sway hanya di tty1, belum ada sesi grafis, dan config sudah ada
+if [[ -z "$WAYLAND_DISPLAY" && -z "$DISPLAY" && "$(tty)" =~ tty1 && -f "$HOME/.config/sway/config" ]]; then
+    exec dbus-run-session sway
+fi

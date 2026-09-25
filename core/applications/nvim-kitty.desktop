@@ -1,0 +1,9 @@
+[Desktop Entry]
+Name=Neovim (kitty)
+Comment=Edit file dengan Neovim di terminal kitty
+Exec=kitty nvim %F
+Terminal=false
+Type=Application
+Icon=nvim
+MimeType=text/plain;text/markdown;text/x-shellscript;application/x-shellscript;application/toml;text/x-toml;application/x-yaml;text/x-yaml;text/x-c;text/x-python;text/x-log;
+Categories=Utility;TextEditor;
