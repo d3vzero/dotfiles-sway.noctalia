@@ -43,6 +43,11 @@ sudo pacman -S --needed --noconfirm core/expat
 echo "==> [2/8] Paket core"
 sudo pacman -S --needed --noconfirm - < "$DOTFILES_DIR/core/packages.txt"
 
+# obsws-python (dipakai script OBS di core/local-bin) -- tidak ada di repo resmi
+if ! python3 -c "import obsws_python" 2>/dev/null; then
+    python3 -m pip install --user --break-system-packages obsws-python
+fi
+
 echo "==> [3/8] aurutils + repo lokal /var/cache/aurrepo"
 if ! command -v aur >/dev/null 2>&1; then
     rm -rf /tmp/aurutils-src
@@ -101,6 +106,11 @@ for f in "$DOTFILES_DIR"/core/applications/*.desktop; do
     [ -e "$f" ] || continue
     ln -sf "$f" ~/.local/share/applications/
 done
+for f in "$DOTFILES_DIR"/core/share/*; do
+    [ -e "$f" ] || continue
+    backup_if_real ~/.local/share/"$(basename "$f")"
+    ln -sf "$f" ~/.local/share/
+done
 update-desktop-database ~/.local/share/applications/ 2>/dev/null || true
 for mime in text/plain text/markdown text/x-shellscript application/x-shellscript; do
     xdg-mime default nvim-kitty.desktop "$mime"
@@ -121,8 +131,11 @@ if [ ! -f ~/.local/state/noctalia/settings.toml ]; then
     cp "$DOTFILES_DIR/core/noctalia-state/settings.toml" ~/.local/state/noctalia/settings.toml
 fi
 cp -n "$DOTFILES_DIR"/core/assets/* ~/Pictures/Wallpapers/ 2>/dev/null || true
-mkdir -p ~/.config/noctalia/plugins/d3vzero/mpd-tools
-cp -r "$DOTFILES_DIR"/core/noctalia-plugins/mpd-tools/. ~/.config/noctalia/plugins/d3vzero/mpd-tools/
+for plug in "$DOTFILES_DIR"/core/noctalia-plugins/*/; do
+    name=$(basename "$plug")
+    mkdir -p ~/.config/noctalia/plugins/d3vzero/"$name"
+    cp -r "${plug%/}"/. ~/.config/noctalia/plugins/d3vzero/"$name"/
+done
 
 echo "==> [7/8] Build manual: Omafiles + ble.sh"
 if [ ! -x ~/.local/bin/omafiles ] && ! command -v omafiles >/dev/null 2>&1; then
@@ -169,7 +182,34 @@ for profile in "${PROFILES[@]}"; do
         ln -sf "$PDIR/config/sway-$profile.conf" ~/.config/sway/conf.d/10-"$profile".conf
     fi
 
+    if [ -d "$PDIR/local-bin" ]; then
+        for f in "$PDIR"/local-bin/*; do
+            [ -e "$f" ] || continue
+            ln -sf "$f" ~/.local/bin/
+            chmod +x ~/.local/bin/"$(basename "$f")"
+        done
+    fi
+
     if [ "$profile" = "daily" ]; then
+        # Setting OBS: pulihkan HANYA kalau ~/.config/obs-studio belum ada (mesin baru)
+        if [ -d "$PDIR/obs-studio" ] && [ ! -d ~/.config/obs-studio ]; then
+            mkdir -p ~/.config/obs-studio
+            cp -r "$PDIR/obs-studio"/. ~/.config/obs-studio/
+            PWFILE=~/.config/obs-tools/password
+            if [ ! -s "$PWFILE" ]; then
+                mkdir -p ~/.config/obs-tools
+                python3 -c 'import secrets; print(secrets.token_urlsafe(18))' > "$PWFILE"
+                chmod 600 "$PWFILE"
+            fi
+            WS=~/.config/obs-studio/plugin_config/obs-websocket/config.json
+            if [ -f "$WS" ]; then
+                jq --arg p "$(cat "$PWFILE")" '.server_password = $p' "$WS" > "$WS.tmp" && mv "$WS.tmp" "$WS"
+            fi
+            echo "    Setting OBS dipulihkan dari repo"
+        elif [ -d ~/.config/obs-studio ]; then
+            echo "    ~/.config/obs-studio sudah ada -- setting OBS tidak ditimpa"
+        fi
+
         DAVINCI_ZIP=$(find "$PDIR/files/davinci" -maxdepth 1 -iname "DaVinci_Resolve_*_Linux.zip" 2>/dev/null | head -n1)
         if [ -n "$DAVINCI_ZIP" ]; then
             echo "    DaVinci installer ketemu: $DAVINCI_ZIP"

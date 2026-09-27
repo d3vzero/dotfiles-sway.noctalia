@@ -69,3 +69,5 @@ perl-json-xs
 fuse2
 libmtp
 less
+wf-recorder
+python-pip

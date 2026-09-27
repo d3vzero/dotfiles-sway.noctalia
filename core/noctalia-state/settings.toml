@@ -10,7 +10,17 @@ order = [ "default", "bottom" ]
     capsule_thickness = 0.99999998137354851
     center = [ "workspaces", "active_window" ]
     enabled = true
-    end = [ "clipboard", "spacer_2", "screenshot" ]
+    end = [
+        "cheatsheet",
+        "spacer_2",
+        "obs_scene",
+        "spacer_2",
+        "casual_record",
+        "spacer_2",
+        "screenshot",
+        "spacer_2",
+        "clipboard"
+    ]
     position = "bottom"
     start = [
         "group:g1",
@@ -38,7 +48,7 @@ order = [ "default", "bottom" ]
     capsule_fill = "surface"
     capsule_thickness = 0.99999998137354851
     center = [ "clock", "spacer_2", "date", "spacer_2", "weather" ]
-    end = [ "bluetooth", "spacer_2", "group:g3" ]
+    end = [ "bluetooth", "spacer_2", "group:g3", "display_mode" ]
     shadow = false
     start = [ "group:g1", "spacer_2", "group:g2", "spacer_2", "group:g4", "group:g5" ]
     thickness = 32
@@ -117,7 +127,7 @@ auto_locate = true
 [lockscreen_widgets]
 enabled = false
 schema_version = 2
-widget_order = [ "lockscreen-login-box@DP-3" ]
+widget_order = [ "lockscreen-login-box@WL-1", "lockscreen-login-box@DP-3" ]
 
     [lockscreen_widgets.grid]
     cell_size = 16
@@ -151,8 +161,35 @@ widget_order = [ "lockscreen-login-box@DP-3" ]
         show_unlock_hint = true
         show_weather = true
 
+    [lockscreen_widgets.widget."lockscreen-login-box@WL-1"]
+    box_height = 196.0
+    box_width = 720.0
+    cx = 425.0
+    cy = 1348.0
+    output = "WL-1"
+    placement_height = 1530.0
+    placement_width = 850.0
+    rotation = 0.0
+    type = "login_box"
+
+        [lockscreen_widgets.widget."lockscreen-login-box@WL-1".settings]
+        background_color = "surface_variant"
+        background_opacity = 0.88
+        background_radius = 12.0
+        center_password_text = false
+        input_opacity = 1.0
+        input_radius = 6.0
+        layout = "regular"
+        show_caps_lock = true
+        show_keyboard_layout = true
+        show_login_button = true
+        show_media = true
+        show_session_buttons = true
+        show_unlock_hint = true
+        show_weather = true
+
 [plugins]
-enabled = [ "d3vzero/mpd-tools" ]
+enabled = [ "d3vzero/mpd-tools", "d3vzero/stream-tools" ]
 
     [[plugins.source]]
     kind = "git"
@@ -197,6 +234,12 @@ title_scroll = "always"
 anchor = true
 show_label = true
 
+[widget.casual_record]
+type = "d3vzero/stream-tools:casual_record"
+
+[widget.cheatsheet]
+type = "d3vzero/stream-tools:cheatsheet"
+
 [widget.date]
 anchor = true
 
@@ -231,7 +274,7 @@ stat = "gpu_usage"
 type = "sysmon"
 
 [widget.gpu_vram]
-stat = "gpu_vram"
+stat = "gpu_vram_used"
 type = "sysmon"
 
 [widget.media]
@@ -255,11 +298,17 @@ type = "d3vzero/mpd-tools:mpd_output"
 [widget.mpd_shuffle]
 type = "d3vzero/mpd-tools:mpd_shuffle"
 
+[widget.display_mode]
+type = "d3vzero/stream-tools:display_mode"
+
 [widget.network_rx]
 anchor = true
 
 [widget.network_tx]
 anchor = true
+
+[widget.obs_scene]
+type = "d3vzero/stream-tools:obs_scene"
 
 [widget.spacer_2]
 type = "spacer"

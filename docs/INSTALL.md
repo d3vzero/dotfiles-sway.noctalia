@@ -100,6 +100,8 @@ Login lagi di tty1 → **Sway start otomatis**.
   `d3vzero` ada → Browse → **MPD Tools** → Enable. Kalau widget belum
   muncul di bar: Bar → Add Widget → `mpd_output`, `mpd_shuffle`,
   `mpd_category_album`, `mpd_category_single`, `mpd_category_cover`.
+- **Plugin Stream Tools** — sama seperti di atas, Enable **Stream Tools**
+  (widget `cheatsheet`, `obs_scene`, `casual_record`, `display_mode`).
 - **SSH key GitHub** (supaya bisa push dari mesin ini):
   ```
   ssh-keygen -t ed25519 -C "DracoAtom-PC" -f ~/.ssh/id_ed25519
@@ -116,8 +118,10 @@ Login lagi di tty1 → **Sway start otomatis**.
   partisi yang sama (bikin entri dobel tanpa manfaat).
 - **Proton-GE** — `profiles/daily/scripts/install-proton-ge.sh`, restart
   Steam, lalu per game: Properties → Compatibility → pilih GE-Proton.
-- **OBS** — source **Screen Capture (PipeWire)** → Open Selector →
-  pilih monitor. Multi-track: Desktop → Track 1+2, Mic → Track 1+3.
+- **OBS** — profil, scene, encoder, dan WebSocket dipulihkan otomatis
+  dari repo. Yang tetap manual: pilih ulang monitor di source Screen
+  Capture (izin PipeWire berlaku per mesin), dan login akun streaming
+  (stream key sengaja tidak disimpan di repo).
 - **DaVinci Resolve** — download `.zip` Linux dari situs Blackmagic
   (butuh akun), taruh apa adanya di `profiles/daily/files/davinci/`,
   lalu `./install.sh daily`. File `.zip` tidak ikut git (`.gitignore`).
@@ -141,6 +145,11 @@ Setting Noctalia yang diubah lewat GUI **tidak** otomatis masuk repo
 ```
 cp ~/.local/state/noctalia/settings.toml core/noctalia-state/
 git add -A && git commit -m "noctalia: update settings" && git push
+```
+Sama untuk OBS (tutup OBS dulu):
+```
+profiles/daily/scripts/obs-config-save.sh
+git add -A && git commit -m "obs: update settings" && git push
 ```
 
 ## Checklist

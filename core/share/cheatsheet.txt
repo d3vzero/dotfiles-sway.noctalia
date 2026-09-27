@@ -1,0 +1,38 @@
+=== SWAY KEYBINDS ===
+Mod+Return          Buka terminal (kitty)
+Mod+F               Buka Firefox
+Mod+C               Tutup window (kill)
+Mod+Shift+E         Keluar sesi Sway
+Mod+E               Buka Omafiles
+Mod+G               Buka Steam
+Mod+O               Buka OBS
+Mod+Shift+S         Split hasil rekam OBS (RAW -> All/Screen/Audio/Mic)
+Mod+U               Mount USB/HP (MTP)
+Mod+Shift+U         Unmount USB/HP
+
+Mod+D               Launcher Noctalia
+Mod+Escape          Session menu
+Mod+L               Lock
+Mod+S               Control center
+Mod+W               Wallpaper random
+Print               Screenshot region
+Mod+Print           Screenshot fullscreen
+
+XF86AudioRaise/Lower/Mute/MicMute   Kontrol volume/mic
+XF86AudioPlay/Next/Prev/Stop        Kontrol MPD
+Mod+[ / Mod+]                        MPC prev/next
+Mod+P                                 MPC toggle
+
+Mod+Tab / Mod+Arrow    Pindah fokus window
+Mod+Ctrl+Arrow          Resize window
+Mod+1-5                 Pindah workspace
+Mod+Shift+1-5            Pindah window ke workspace
+
+=== OMAFILES ===
+Klik kanan file -> "Buka dengan Neovim"  (kitty nvim {path})
+
+=== NEOVIM DASAR ===
+i           Masuk mode Insert
+Esc         Balik ke mode Normal
+:wq + Enter Simpan & keluar
+:q! + Enter Keluar tanpa simpan

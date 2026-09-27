@@ -1,0 +1,38 @@
+id = "d3vzero/stream-tools"
+name = "Stream Tools"
+version = "1.0.0"
+plugin_api = 15
+author = "d3vzero"
+license = "MIT"
+dependencies = []
+tags = ["obs", "recording", "utility"]
+icon = "video"
+description = "OBS scene picker, casual quick-record (wf-recorder), dan cheatsheet keybind."
+
+[[widget]]
+id = "obs_scene"
+entry = "obs_scene.luau"
+
+  [widget.actions]
+  left = "plugin d3vzero/stream-tools:obs_scene all toggle"
+
+[[widget]]
+id = "casual_record"
+entry = "casual_record.luau"
+
+  [widget.actions]
+  left = "plugin d3vzero/stream-tools:casual_record all toggle"
+
+[[widget]]
+id = "cheatsheet"
+entry = "cheatsheet.luau"
+
+  [widget.actions]
+  left = "plugin d3vzero/stream-tools:cheatsheet all toggle"
+
+[[widget]]
+id = "display_mode"
+entry = "display_mode.luau"
+
+  [widget.actions]
+  left = "plugin d3vzero/stream-tools:display_mode all toggle"
